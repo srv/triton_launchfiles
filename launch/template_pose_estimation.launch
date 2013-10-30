@@ -1,0 +1,28 @@
+<launch>
+	<arg name="camera" default="/stereo_forward/left"/>
+	<arg name="image" default="image_rect_color"/>
+
+	<node pkg="template_pose_estimation" type="template_pose" name="template_pose" output="screen">
+		<param name="image_topic" value="$(arg camera)/$(arg image)"/>
+		<param name="image_info_topic" value="$(arg camera)/camera_info"/>
+
+		<param name="queue_size" value="2"/>
+		<param name="desc_threshold" value="0.8"/>
+		<param name="min_matches" value="40"/>
+		<param name="min_inliers" value="20"/>
+		<param name="template_image_name" value="template.png"/>
+		<param name="frame_id" value="/stereo_forward_optical"/>
+		<param name="template_frame_id" value="/template_image"/>
+		<param name="desc_type" value="SIFT"/>
+		<param name="bucket_width" value="30"/>
+		<param name="bucket_height" value="30"/>
+		<param name="max_bucket_features" value="10"/>
+
+		<!-- This parameters are important! -->
+		<param name="template_width" value="0.250"/>
+		<param name="template_height" value="0.166"/>
+
+		<!-- Listen to services -->
+		<param name="listen_services" value="true"/>
+	</node>
+</launch>
