@@ -3,7 +3,7 @@
   <arg name="camera" default="/stereo_forward/left"/>
   <arg name="image" default="image_rect_color"/>
 
-  <node pkg="pattern_pose_estimation" type="marker_detector_node" name="marker_detector_node" output="screen">
+  <node pkg="pattern_pose_estimation" type="marker_detector_node" name="marker_detector_node">
     <remap from="image" to="$(arg camera)/$(arg image)" />
     <rosparam command="load" file="$(find triton_launchfiles)/etc/marker_detector.yaml" />
     <param name="marker_frame" value="marker"/>
