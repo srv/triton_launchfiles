@@ -36,4 +36,7 @@
 		<param name="num_samples_wwf" value="10"/>
 	</node>
 
+	<!-- Static transform from valve to connector -->
+	<!--node pkg="tf" type="static_transform_publisher" name="valve_to_connector" args="-0.01 0.25 -0.16 0 0 -0.52 $(arg child_frame_id)_filtered connector 100" /-->
+
 </launch>
