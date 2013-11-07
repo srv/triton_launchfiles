@@ -4,6 +4,7 @@
   <arg name="image" default="image_rect_color"/>
   <arg name="reference_frame_id" default="/stereo_forward_optical"/>
   <arg name="child_frame_id" default="/valve"/>
+  <arg name="listen_services" default="true"/>
 
   <node pkg="valve_tracker_triton" type="tracker_node" name="valve_tracker" output="screen">
     <param name="stereo_frame_id" value="$(arg reference_frame_id)"/>
@@ -23,7 +24,7 @@
     <param name="max_trans_diff" value="99999"/>
     
     <!-- Listen to services -->
-    <param name="listen_services" value="true"/>
+    <param name="listen_services" value="$(arg listen_services)"/>
 
     <rosparam command="load" file="$(find valve_tracker_triton)/etc/model.yaml" />
 
