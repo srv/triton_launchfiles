@@ -11,9 +11,9 @@
     <param name="valve_frame_id" value="$(arg child_frame_id)"/>
     <param name="mean_filter_size" value="5"/>
     <param name="opening_element_size" value="3"/>
-    <param name="closing_element_size" value="3"/>
+    <param name="closing_element_size" value="7"/>
     <param name="epipolar_width_threshold" value="4"/>
-    <param name="binary_threshold" value="71"/>
+    <param name="binary_threshold" value="25"/>
     <param name="min_value_threshold" value="43"/>
     <param name="min_blob_size" value="5"/>
     <param name="max_blob_size" value="200"/>
@@ -36,9 +36,9 @@
   <node pkg="tf_tools" type="tf_filter" name="tf_filter_valve_tracker" output="screen">
     <param name="reference_frame_id" value="$(arg reference_frame_id)"/>
     <param name="child_frame_id" value="$(arg child_frame_id)"/>
-    <param name="frequency" value="10"/>
+    <param name="frequency" value="5"/>
     <param name="ramp_wwf" value="0.5"/>
-    <param name="num_samples_wwf" value="10"/>
+    <param name="num_samples_wwf" value="40"/>
   </node>
 
   <!-- Static transform from valve to connector -->
