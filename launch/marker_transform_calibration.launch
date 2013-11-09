@@ -1,0 +1,37 @@
+<launch>
+
+  <arg name="use_sim_time" default="false"/>
+  <param name="use_sim_time" value="$(arg use_sim_time)"/>
+  <arg name="image" default="image_rect_color"/>
+
+  <group if="$(arg use_sim_time)" ns="stereo_forward" >
+    <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" output="screen" />
+  </group>
+
+  <group if="$(arg use_sim_time)" ns="stereo_down" >
+    <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" output="screen" />
+  </group>
+
+  <node pkg="pattern_pose_estimation" type="marker_detector_node" name="marker_detector_node_f">
+    <remap from="image" to="/stereo_forward/left/$(arg image)" />
+    <rosparam command="load" file="$(find triton_launchfiles)/etc/marker_detector_forward.yaml" />
+    <param name="marker_frame" value="marker"/>
+    <param name="use_history" type="bool" value="true"/>
+    <param name="cache_camera_info" type="bool" value="true"/>
+    <param name="lazy" type="bool" value="false"/>
+    <param name="rectified" type="bool" value="true"/>
+    <param name="show_debug_image" value="true"/>
+  </node>
+
+  <node pkg="pattern_pose_estimation" type="marker_detector_node" name="marker_detector_node_d">
+    <remap from="image" to="/stereo_down/left/$(arg image)" />
+    <rosparam command="load" file="$(find triton_launchfiles)/etc/marker_detector_down.yaml" />
+    <param name="marker_frame" value="marker"/>
+    <param name="use_history" type="bool" value="true"/>
+    <param name="cache_camera_info" type="bool" value="true"/>
+    <param name="lazy" type="bool" value="false"/>
+    <param name="rectified" type="bool" value="true"/>
+    <param name="show_debug_image" value="true"/>
+  </node>
+
+</launch>
