@@ -1,20 +1,20 @@
 <launch>
 
 	<arg name="stereo" default="/stereo_forward"/>
-	<arg name="camera" default="/stereo_forward/left"/>
-  <arg name="image" default="image_rect_color"/>
+	<arg name="camera" default="/$(arg stereo)/left"/>
+  	<arg name="image" default="image_rect_color"/>
 
-	<include file="$(find triton_launchfiles)/launch/valve_tracker.launch">
+	<include file="$(find triton_launchfiles)/launch/one_camera/valve_tracker.launch">
 		<arg name="stereo" value="$(arg stereo)"/>
 		<arg name="image" value="$(arg image)"/>
 	</include>
 
-	<include file="$(find triton_launchfiles)/launch/ar_marker_endeffector.launch">
+	<include file="$(find triton_launchfiles)/launch/one_camera/ar_marker_endeffector.launch">
 		<arg name="camera" value="$(arg camera)"/>
 		<arg name="image" value="$(arg image)"/>
 	</include>
 
-	<include file="$(find triton_launchfiles)/launch/template_pose_estimation.launch">
+	<include file="$(find triton_launchfiles)/launch/one_camera/ar_marker_panel.launch">
 		<arg name="camera" value="$(arg camera)"/>
 		<arg name="image" value="$(arg image)"/>
 	</include>

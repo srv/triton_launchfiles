@@ -12,7 +12,7 @@
   	<param name="cache_camera_info" type="bool" value="true"/>
   	<param name="lazy" type="bool" value="false"/>
   	<param name="rectified" type="bool" value="true"/>
-    <param name="show_debug_image" value="true"/>
+    <param name="show_debug_image" value="false"/>
   </node>
 
   <node pkg="pattern_pose_estimation" type="marker_filter_node" name="marker_filter_panel" output="screen">
@@ -24,7 +24,10 @@
     <param name="ramp_wwf" value="0.5"/>
   </node>
 
-  <!-- Static transform from template to connector -->
+  <!-- Static transform from marker to connector -->
   <node pkg="tf" type="static_transform_publisher" name="marker_to_connector" args="0.11 0.0 0.35 0 0 0 panel_marker connector 100" />
+
+  <!-- Static transform from marker to valve -->
+  <!--node pkg="tf" type="static_transform_publisher" name="panel_to_valve" args="0.140938 0.3482 0.165521 0.0121088 -0.0172919 -2.62605 panel_marker valve_filtered 100" /-->
 
 </launch>

@@ -1,0 +1,19 @@
+<launch>
+
+    <arg name="bagfile" default="/home/plnegre/Workspace/ROS_data/bagfiles/TRITON_CIRS/two_cameras_2013-11-12-17-11-07_0.bag /home/plnegre/Workspace/ROS_data/bagfiles/TRITON_CIRS/two_cameras_2013-11-12-17-11-40_1.bag"/>
+
+    <!-- Setup the camera -->
+    <param name="/use_sim_time" value="true"/>
+
+    <!-- Play the bagfile -->
+    <node pkg="rosbag" type="play" name="rosbag" args="--clock $(arg bagfile) -l"/>
+
+    <!-- Run the stereo image proc -->
+    <group ns="/stereo_forward">
+        <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" />
+    </group>
+    <group ns="/stereo_down">
+        <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" />
+    </group>
+
+</launch>

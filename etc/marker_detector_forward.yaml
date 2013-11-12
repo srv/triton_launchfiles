@@ -1,6 +1,0 @@
-threshold: 100
-markers: 
-  [
-    # format is id, pattern_file_name, width, center_x, center_y
-    [ 2, "package://ar_pose/data/4x4/4x4_95.patt", 0.064, 0.0, 0.0 ]
-  ]
