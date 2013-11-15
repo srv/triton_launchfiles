@@ -5,6 +5,7 @@
   <arg name="reference_frame_id" default="/stereo_down_optical"/>
   <arg name="child_frame_id" default="/valve"/>
   <arg name="listen_services" default="true"/>
+  <arg name="debug" default="false"/>
 
   <node pkg="valve_tracker_triton" type="tracker_node" name="valve_tracker" output="screen">
     <param name="stereo_frame_id" value="$(arg reference_frame_id)"/>
@@ -13,11 +14,11 @@
     <param name="opening_element_size" value="3"/>
     <param name="closing_element_size" value="7"/>
     <param name="epipolar_width_threshold" value="4"/>
-    <param name="binary_threshold" value="25"/>
+    <param name="binary_threshold" value="4"/>
     <param name="min_value_threshold" value="43"/>
     <param name="min_blob_size" value="5"/>
     <param name="max_blob_size" value="200"/>
-    <param name="show_debug" value="true"/>
+    <param name="show_debug" value="$(arg debug)"/>
     <param name="tf_filter_size" value="3"/>  
     <param name="warning_on" value="true"/>
     <param name="max_rot_diff" value="99999"/>
@@ -40,8 +41,5 @@
     <param name="ramp_wwf" value="0.5"/>
     <param name="num_samples_wwf" value="40"/>
   </node>
-
-  <!-- Static transform from valve to connector -->
-  <!--node pkg="tf" type="static_transform_publisher" name="valve_to_connector" args="-0.01 0.25 -0.16 0 0 -0.52 $(arg child_frame_id)_no_rot connector 100" /-->
   
 </launch>

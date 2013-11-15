@@ -12,7 +12,7 @@
   	<param name="cache_camera_info" type="bool" value="true"/>
   	<param name="lazy" type="bool" value="false"/>
   	<param name="rectified" type="bool" value="true"/>
-    <param name="show_debug_image" value="true"/>
+    <param name="show_debug_image" value="false"/>
   </node>
 
   <node pkg="pattern_pose_estimation" type="marker_filter_node" name="marker_filter_endeffector" output="screen">
@@ -25,6 +25,6 @@
   </node>
 
   <!-- Stereo forward to stereo down transformation -->
-  <node pkg="tf" type="static_transform_publisher" name="forward_to_down" args="0.00455061 -0.0513183 0.00208987 0.00696352 -0.038694 -0.00371097 stereo_forward_optical stereo_down_optical 100" />
+  <!--node pkg="tf" type="static_transform_publisher" name="forward_to_down" args="0.00455061 -0.0513183 0.00208987 0.00696352 -0.038694 -0.00371097 stereo_forward_optical stereo_down_optical 100" /-->
 
 </launch>

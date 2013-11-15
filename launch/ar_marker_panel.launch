@@ -25,9 +25,9 @@
   </node>
 
   <!-- Static transform from marker to connector -->
-  <node pkg="tf" type="static_transform_publisher" name="marker_to_connector" args="0.11 0.0 0.35 0 0 0 panel_marker connector 100" />
+  <node pkg="tf" type="static_transform_publisher" name="marker_to_connector" args="-0.18 0.017 0.342 0 0 0 panel_marker connector 100" />
 
   <!-- Static transform from marker to valve -->
-  <!--node pkg="tf" type="static_transform_publisher" name="panel_to_valve" args="0.140938 0.3482 0.165521 0.0121088 -0.0172919 -2.62605 panel_marker valve_filtered 100" /-->
+  <node pkg="tf" type="static_transform_publisher" name="panel_to_valve" args=" -0.180909 0.380539 0.17138 0.0668195 -0.051581 -2.63846 panel_marker valve_filtered 100" />
 
 </launch>
