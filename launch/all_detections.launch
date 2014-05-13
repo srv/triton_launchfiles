@@ -1,10 +1,15 @@
 <launch>
 
 	<arg name="stereo_f" default="/stereo_forward"/>
-	<arg name="camera_f" default="/$(arg stereo_f)/left"/>
+	<arg name="camera_f" default="/$(arg stereo_f)/right"/>
 	<arg name="stereo_d" default="/stereo_down"/>
-	<arg name="camera_d" default="/$(arg stereo_d)/left"/>
+	<arg name="camera_d" default="/$(arg stereo_d)/right"/>
 	<arg name="image" default="image_rect_color"/>
+
+	<arg name="show_debug_image" default="false"/>
+	<arg name="dynamic_thres_rate" default="1.0"/>
+	<arg name="max_bin_thres" default="190"/>
+	<arg name="min_bin_thres" default="160"/>
 
 	<!--include file="$(find triton_launchfiles)/launch/valve_tracker.launch">
 		<arg name="stereo" value="$(arg stereo_d)"/>
@@ -15,11 +20,19 @@
 	<include file="$(find triton_launchfiles)/launch/ar_marker_endeffector.launch">
 		<arg name="camera" value="$(arg camera_d)"/>
 		<arg name="image" value="$(arg image)"/>
+		<arg name="show_debug_image" value="$(arg show_debug_image)"/>
+		<arg name="dynamic_thres_rate" default="$(arg dynamic_thres_rate)"/>
+		<arg name="max_bin_thres" default="$(arg max_bin_thres)"/>
+		<arg name="min_bin_thres" default="$(arg min_bin_thres)"/>
 	</include>
 
 	<include file="$(find triton_launchfiles)/launch/ar_marker_panel.launch">
 		<arg name="camera" value="$(arg camera_d)"/>
 		<arg name="image" value="$(arg image)"/>
+		<arg name="show_debug_image" value="$(arg show_debug_image)"/>
+		<arg name="dynamic_thres_rate" default="$(arg dynamic_thres_rate)"/>
+		<arg name="max_bin_thres" default="$(arg max_bin_thres)"/>
+		<arg name="min_bin_thres" default="$(arg min_bin_thres)"/>
 	</include>
 
 </launch>

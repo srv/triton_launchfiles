@@ -1,7 +1,12 @@
 <launch>
 
-  <arg name="camera" default="/stereo_forward/left"/>
+  <arg name="camera" default="/stereo_down/right"/>
   <arg name="image" default="image_rect_color"/>
+
+  <arg name="show_debug_image" default="false"/>
+  <arg name="dynamic_thres_rate" default="1.0"/>
+  <arg name="max_bin_thres" default="190"/>
+  <arg name="min_bin_thres" default="160"/>
 
   <node pkg="pattern_pose_estimation" type="marker_detector_node" name="marker_detector_panel">
     <remap from="image" to="$(arg camera)/$(arg image)" />
@@ -12,11 +17,15 @@
   	<param name="cache_camera_info" type="bool" value="true"/>
   	<param name="lazy" type="bool" value="false"/>
   	<param name="rectified" type="bool" value="true"/>
-    <param name="show_debug_image" value="false"/>
+    <param name="show_debug_image" value="$(arg show_debug_image)"/>
+    <param name="dynamic_thres_rate" value="$(arg dynamic_thres_rate)"/>
+    <param name="max_bin_thres" value="$(arg max_bin_thres)"/>
+    <param name="min_bin_thres" value="$(arg min_bin_thres)"/>
   </node>
 
   <node pkg="pattern_pose_estimation" type="marker_filter_node" name="marker_filter_panel" output="screen">
     <param name="frame_id" value="panel_marker"/>
+  	<param name="parent_frame_id" value="stereo_down_optical_right"/>
     <param name="marker_msg" value="ar_pose_panel"/> 
     <param name="filter_mode" value="best"/>
     <param name="use_wwf" value="true"/>
@@ -24,10 +33,16 @@
     <param name="ramp_wwf" value="0.5"/>
   </node>
 
+  <!-- For calibration purposes -->
+  <!--node pkg="tf" type="static_transform_publisher" name="tmp_2" args="0.131 -0.303 0.782 0.016 0.012 -1.809 stereo_down_optical_right panel_marker 100" /-->
+  <!--node pkg="tf" type="static_transform_publisher" name="tmp_calib" args="0 0 0 1.57 -1.57 0 ee_marker tip 100" /-->
+
   <!-- Static transform from marker to connector -->
-  <node pkg="tf" type="static_transform_publisher" name="marker_to_connector" args="-0.18 0.017 0.342 0 0 0 panel_marker connector 100" />
+  <!--node pkg="tf" type="static_transform_publisher" name="marker_to_connector" args="-0.201 -0.09 0.326 1.503 0 -3.112 panel_marker connector 100" /-->
+  <node pkg="tf" type="static_transform_publisher" name="marker_to_connector" args="-0.201 -0.045 0.36 1.57 0 -3.14 panel_marker connector 100" />
 
   <!-- Static transform from marker to valve -->
-  <node pkg="tf" type="static_transform_publisher" name="panel_to_valve" args=" -0.180909 0.380539 0.17138 0.0668195 -0.051581 -2.63846 panel_marker valve_filtered 100" />
+  <!--node pkg="tf" type="static_transform_publisher" name="panel_to_valve" args="-0.2 0.246 0.168 1.541 -0.507 -3.139 panel_marker valve_filtered 100" /-->
+  <node pkg="tf" type="static_transform_publisher" name="panel_to_valve" args="-0.2 0.295 0.21 1.541 -0.507 -3.139 panel_marker valve_filtered 100" />
 
 </launch>
